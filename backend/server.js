@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 const app = express();
 
 import authRoutes from "./routes/auth.routes.js";
-
+import  connectToDB  from "./db/connectToMongoDB.js";
+app.use(express.json());
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -13,5 +14,6 @@ app.get("/api/v1/", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  connectToDB();
   console.log(`Server is listing on port http://localhost:${PORT}/api/v1/`);
 });
