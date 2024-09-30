@@ -1,17 +1,14 @@
+dotenv.config();
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 const app = express();
-
-import authRoutes from "./routes/auth.routes.js";
-import  connectToDB  from "./db/connectToMongoDB.js";
-app.use(express.json());
-dotenv.config();
-
 const PORT = process.env.PORT || 5000;
+app.use(express.json());
+import authRoutes from "./routes/auth.routes.js";
+import connectToDB from "./db/connectToMongoDB.js";
+
 app.use("/api/v1/auth", authRoutes);
-app.get("/api/v1/", (req, res) => {
-  res.json({ msg: "Hello World!!" });
-});
 
 app.listen(PORT, () => {
   connectToDB();
